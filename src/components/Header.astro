@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+import { LANGS, LANG_META, ui, homePath, type Lang } from '../lib/i18n';
+import { settings, telHref } from '../lib/data';
+interface Props { lang: Lang; alternates: Record<Lang, string> }
+const { lang, alternates } = Astro.props;
+const t = ui[lang];
+const home = homePath(lang);
+const nav = [
+  { href: `${home}#servicios`, label: t.navServices },
+  { href: `${home}#why`, label: t.navWhy },
+  { href: `${home}#zona`, label: t.navArea },
+  { href: `${home}#faq`, label: t.navFaq },
+  { href: `${home}#contacto`, label: t.navContact },
+];
+---
+<header class="site-header" data-section="header">
+  <div class="container header-inner">
+    <a href={home} class="logo" aria-label={settings.brand}>
+      <img src="/images/logo.png" alt={settings.brand} width="392" height="226" />
+    </a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main">
+      <ul>
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label={t.language}>
+        {LANGS.map((l) => (
+          <a
+            href={alternates[l]}
+            hreflang={l}
+            lang={l}
+            title={LANG_META[l].name}
+            class={l === lang ? 'active' : ''}
+            aria-current={l === lang ? 'true' : undefined}
+            data-track="select_language"
+            data-track-label={l}
+          >{LANG_META[l].label}</a>
+        ))}
+      </div>
+      <a href={telHref()} class="header-phone" data-track-location="header">
+        <Icon name="phone" size={18} />
+        <span>{settings.phone}</span>
+      </a>
+      <button class="menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label={t.openMenu}>
+        <Icon name="menu" class="i-open" />
+        <Icon name="close" class="i-close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const header = document.querySelector('.site-header');
+  btn?.addEventListener('click', () => {
+    const open = header!.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('.main-nav a').forEach((a) =>
+    a.addEventListener('click', () => {
+      header!.classList.remove('nav-open');
+      btn?.setAttribute('aria-expanded', 'false');
+    }),
+  );
+</script>

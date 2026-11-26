@@ -1,0 +1,131 @@
+{
+  "es": {
+    "seoTitle": "Fontanero en Valencia y Sagunto — fontanería, calefacción, aerotermia y piscinas",
+    "seoDescription": "Maestro Especial S.L.: fontanería, calefacción, aerotermia, piscinas y tratamiento de agua en Valencia y Sagunto. Más de 26 años de experiencia. Precio acordado antes de empezar. ☎ 652 920 274",
+    "heroBadge": "Más de 26 años de experiencia",
+    "heroTitle": "Fontanería, calefacción, aerotermia y piscinas en Valencia",
+    "heroSubtitle": "Soluciones profesionales para su hogar y su negocio. Encontramos la causa de la avería y la reparamos bien a la primera.",
+    "heroImage": "",
+    "problemsTitle": "¿Le suena alguno de estos problemas?",
+    "problems": [
+      "Gotean las tuberías",
+      "Poca presión de agua",
+      "La calefacción no funciona",
+      "Problemas con la piscina",
+      "Cal y agua de mala calidad"
+    ],
+    "problemsText": "No gaste dinero en soluciones temporales y arreglos interminables. Lo importante es identificar correctamente la causa de la avería y eliminarla de forma profesional.",
+    "servicesTitle": "Nuestros servicios",
+    "whyTitle": "¿Por qué confiar en nosotros?",
+    "why": [
+      { "title": "Más de 26 años de experiencia", "text": "Experiencia práctica real en instalaciones de agua, calefacción y piscinas." },
+      { "title": "Diagnóstico técnico", "text": "Primero encontramos la causa del problema, después la solucionamos." },
+      { "title": "Particulares y empresas", "text": "Viviendas, comunidades de vecinos, locales y negocios." },
+      { "title": "Empresa oficial con factura", "text": "Trabajamos a través de Maestro Especial S.L. y emitimos factura." },
+      { "title": "Precio acordado antes de empezar", "text": "Sin sorpresas: conoce el coste antes de que empiece el trabajo." },
+      { "title": "Garantía de calidad", "text": "Respondemos por el trabajo realizado." }
+    ],
+    "aboutTitle": "Sobre nosotros",
+    "aboutText": "Me llamo **Alexey**. Soy especialista en fontanería e instalaciones con más de 26 años de experiencia.\n\nNuestro objetivo no es solo eliminar la avería, sino encontrar una solución técnicamente correcta y fiable. Atendemos en español, ruso e inglés.",
+    "aboutImage": "",
+    "areaTitle": "Zona de trabajo",
+    "areaText": "Trabajamos en Valencia, Sagunto y alrededores. Desplazamiento a toda España previo acuerdo.",
+    "reviewsTitle": "Opiniones de clientes",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      { "q": "¿Cuánto cuesta el trabajo?", "a": "Depende de la avería y del alcance. El precio siempre se acuerda antes de empezar. Envíenos fotos o un vídeo por WhatsApp y le daremos una valoración previa." },
+      { "q": "¿Emiten factura?", "a": "Sí. Trabajamos oficialmente a través de Maestro Especial S.L. y emitimos factura por todos los trabajos, tanto a particulares como a empresas." },
+      { "q": "¿En qué zonas trabajan?", "a": "En Valencia, Sagunto y alrededores. Bajo acuerdo previo nos desplazamos a cualquier punto de España." },
+      { "q": "¿En qué idiomas atienden?", "a": "En español, ruso e inglés." },
+      { "q": "¿Puedo enviar fotos de la avería?", "a": "Sí, es lo más rápido. Mándenos fotos o un vídeo por WhatsApp y le diremos cómo lo vemos y qué solución proponemos." }
+    ],
+    "contactTitle": "¿Necesita un fontanero profesional?",
+    "contactText": "Llame o escriba por WhatsApp. Puede enviar directamente fotos o vídeo de la avería: haremos una valoración previa y hablaremos de la solución."
+  },
+  "ru": {
+    "seoTitle": "Сантехник в Валенсии и Сагунто — сантехника, отопление, аэротермия, бассейны",
+    "seoDescription": "Maestro Especial S.L.: сантехника, отопление, аэротермия, бассейны и очистка воды в Валенсии и Сагунто. Русскоязычный мастер, опыт более 26 лет. Цена до начала работ. ☎ +34 652 920 274",
+    "heroBadge": "Более 26 лет опыта",
+    "heroTitle": "Сантехника, отопление, аэротермия и бассейны в Валенсии",
+    "heroSubtitle": "Профессиональные решения для вашего дома и бизнеса. Находим причину неисправности и устраняем её правильно с первого раза.",
+    "heroImage": "",
+    "problemsTitle": "Знакомые проблемы?",
+    "problems": [
+      "Протекают трубы",
+      "Слабый напор воды",
+      "Не работает отопление",
+      "Проблемы с бассейном",
+      "Жёсткая вода и известковый налёт"
+    ],
+    "problemsText": "Не стоит тратить деньги на временные решения и бесконечные переделки. Важно правильно определить причину неисправности и устранить её профессионально.",
+    "servicesTitle": "Наши услуги",
+    "whyTitle": "Почему стоит доверить работу нам?",
+    "why": [
+      { "title": "Более 26 лет опыта", "text": "Реальный практический опыт в водоснабжении, отоплении и бассейнах." },
+      { "title": "Техническая диагностика", "text": "Сначала находим причину проблемы, потом её устраняем." },
+      { "title": "Частные клиенты и компании", "text": "Квартиры, дома, жилые комплексы, офисы и бизнес." },
+      { "title": "Официально, с factura", "text": "Работаем через Maestro Especial S.L. и выставляем счёт-фактуру." },
+      { "title": "Цена — до начала работ", "text": "Никаких сюрпризов: стоимость согласовывается заранее." },
+      { "title": "Ответственность за качество", "text": "Отвечаем за выполненную работу." }
+    ],
+    "aboutTitle": "О нас",
+    "aboutText": "Меня зовут **Алексей**. Я специалист по сантехническим и инженерным системам с опытом более 26 лет.\n\nНаша задача — не просто устранить неисправность, а найти технически правильное и надёжное решение. Говорим по-русски, по-испански и по-английски.",
+    "aboutImage": "",
+    "areaTitle": "Где мы работаем",
+    "areaText": "Работаем в Валенсии, Сагунто и окрестностях. Выезд по всей Испании по договорённости.",
+    "reviewsTitle": "Отзывы клиентов",
+    "faqTitle": "Частые вопросы",
+    "faq": [
+      { "q": "Сколько стоят работы?", "a": "Зависит от неисправности и объёма. Стоимость всегда согласовывается до начала работ. Пришлите фото или видео в WhatsApp — дадим предварительную оценку." },
+      { "q": "Вы выставляете factura?", "a": "Да. Мы работаем официально через Maestro Especial S.L. и выставляем factura на все работы — и частным лицам, и компаниям." },
+      { "q": "В каких районах вы работаете?", "a": "В Валенсии, Сагунто и окрестностях. По договорённости выезжаем в любую точку Испании." },
+      { "q": "На каких языках вы общаетесь?", "a": "На русском, испанском и английском." },
+      { "q": "Можно отправить фото неисправности?", "a": "Да, так быстрее всего. Отправьте фото или видео в WhatsApp — скажем, как видим ситуацию и какое решение предлагаем." }
+    ],
+    "contactTitle": "Нужен профессиональный сантехник?",
+    "contactText": "Позвоните или напишите в WhatsApp. Можно сразу отправить фотографии или видео неисправности — предварительно оценим ситуацию и обсудим возможное решение."
+  },
+  "en": {
+    "seoTitle": "Plumber in Valencia and Sagunto — plumbing, heating, aerothermal, pools",
+    "seoDescription": "Maestro Especial S.L.: plumbing, heating, aerothermal heat pumps, swimming pools and water treatment in Valencia and Sagunto. 26+ years of experience. Price agreed upfront. ☎ +34 652 920 274",
+    "heroBadge": "26+ years of experience",
+    "heroTitle": "Plumbing, heating, aerothermal and pools in Valencia",
+    "heroSubtitle": "Professional solutions for your home and business. We find the cause of the problem and fix it properly the first time.",
+    "heroImage": "",
+    "problemsTitle": "Sound familiar?",
+    "problems": [
+      "Leaking pipes",
+      "Low water pressure",
+      "Heating not working",
+      "Swimming pool problems",
+      "Hard water and limescale"
+    ],
+    "problemsText": "Don't waste money on temporary fixes and endless rework. What matters is identifying the cause of the fault correctly and fixing it professionally.",
+    "servicesTitle": "Our services",
+    "whyTitle": "Why choose us?",
+    "why": [
+      { "title": "26+ years of experience", "text": "Real hands-on experience with water, heating and pool systems." },
+      { "title": "Technical diagnosis", "text": "We find the cause of the problem first, then fix it." },
+      { "title": "Homes and businesses", "text": "Flats, houses, residential communities, offices and businesses." },
+      { "title": "Registered company, invoice provided", "text": "We work through Maestro Especial S.L. and issue a factura." },
+      { "title": "Price agreed upfront", "text": "No surprises: you know the cost before work starts." },
+      { "title": "Quality guaranteed", "text": "We stand behind the work we do." }
+    ],
+    "aboutTitle": "About us",
+    "aboutText": "My name is **Alexey**. I am a plumbing and building services specialist with more than 26 years of experience.\n\nOur goal is not just to fix the fault, but to find a technically correct and reliable solution. We speak English, Spanish and Russian.",
+    "aboutImage": "",
+    "areaTitle": "Where we work",
+    "areaText": "We work in Valencia, Sagunto and the surrounding area. Travel anywhere in Spain by arrangement.",
+    "reviewsTitle": "Customer reviews",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      { "q": "How much does it cost?", "a": "It depends on the problem and the scope of work. The price is always agreed before we start. Send us photos or a video on WhatsApp and we'll give you a preliminary estimate." },
+      { "q": "Do you provide an invoice?", "a": "Yes. We work officially through Maestro Especial S.L. and issue an invoice (factura) for every job, for private clients and companies alike." },
+      { "q": "Which areas do you cover?", "a": "Valencia, Sagunto and the surrounding area. By arrangement we travel anywhere in Spain." },
+      { "q": "Which languages do you speak?", "a": "English, Spanish and Russian." },
+      { "q": "Can I send photos of the problem?", "a": "Yes, that's the fastest way. Send photos or a video via WhatsApp and we'll tell you how we see it and what we suggest." }
+    ],
+    "contactTitle": "Need a professional plumber?",
+    "contactText": "Call or message us on WhatsApp. You can send photos or a video of the problem straight away — we'll make a preliminary assessment and discuss a solution."
+  }
+}

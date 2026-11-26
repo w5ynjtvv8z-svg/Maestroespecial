@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import ContactSection from './ContactSection.astro';
+import { LANGS, ui, homePath, servicePath, type Lang } from '../lib/i18n';
+import { settings, getServices, getHome, getReviews, md, telHref, waHref } from '../lib/data';
+import { businessSchema, faqSchema } from '../lib/schema';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+const h = getHome(lang);
+const services = getServices(lang);
+const reviews = getReviews();
+const alternates = Object.fromEntries(LANGS.map((l) => [l, homePath(l)])) as Record<Lang, string>;
+const whyIcons = ['clock', 'search', 'users', 'invoice', 'euro', 'shield'];
+---
+<Base
+  lang={lang}
+  title={h.seoTitle}
+  description={h.seoDescription}
+  alternates={alternates}
+  jsonLd={[businessSchema(lang, services), faqSchema(h.faq)]}
+>
+  <section class="hero" data-section="hero" style={h.heroImage ? `--hero-img:url('${h.heroImage}')` : undefined}>
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="badge">{h.heroBadge}</span>
+        <h1>{h.heroTitle}</h1>
+        <p class="lead">{h.heroSubtitle}</p>
+        <div class="hero-cta">
+          <a href={telHref()} class="btn btn-red btn-lg" data-track-location="hero">
+            <Icon name="phone" /> {settings.phone}
+          </a>
+          <a href={waHref(t.waMessage)} class="btn btn-wa btn-lg" target="_blank" rel="noopener" data-track-location="hero">
+            <Icon name="whatsapp" /> {t.sendPhotos}
+          </a>
+        </div>
+        <ul class="trust">
+          <li><Icon name="check" size={18} /> {settings.yearsExperience}+ {t.years}</li>
+          <li><Icon name="check" size={18} /> {t.invoice}</li>
+          <li><Icon name="check" size={18} /> {t.priceBefore}</li>
+        </ul>
+      </div>
+      <div class="problems card">
+        <h2>{h.problemsTitle}</h2>
+        <ul>
+          {h.problems.map((p: string) => <li><Icon name="alert" size={20} /> {p}</li>)}
+        </ul>
+        <p>{h.problemsText}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" class="section" data-section="services">
+    <div class="container">
+      <h2 class="section-title">{h.servicesTitle}</h2>
+      <div class="services-grid">
+        {services.map((s) => (
+          <article class="service-card card">
+            {s.image ? (
+              <img src={s.image} alt={s.title} loading="lazy" class="service-img" />
+            ) : (
+              <div class="service-icon"><Icon name={s.icon} size={34} /></div>
+            )}
+            <h3><a href={servicePath(lang, s.slug)}>{s.title}</a></h3>
+            <p>{s.short}</p>
+            <ul class="checklist">
+              {s.items.slice(0, 4).map((it) => <li><Icon name="check" size={16} /> {it}</li>)}
+            </ul>
+            <a href={servicePath(lang, s.slug)} class="more" data-track="click_cta" data-track-label={`service:${s.id}`}>
+              {t.more} <Icon name="arrow" size={18} />
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="section section-dark" data-section="why">
+    <div class="container">
+      <h2 class="section-title">{h.whyTitle}</h2>
+      <div class="why-grid">
+        {h.why.map((w: { title: string; text: string }, i: number) => (
+          <div class="why-item">
+            <div class="why-icon"><Icon name={whyIcons[i % whyIcons.length]} size={26} /></div>
+            <h3>{w.title}</h3>
+            <p>{w.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="zona" class="section" data-section="about">
+    <div class="container about-grid">
+      <div>
+        <h2 class="section-title left">{h.aboutTitle}</h2>
+        {h.aboutImage && <img src={h.aboutImage} alt={settings.ownerName} class="about-img" loading="lazy" />}
+        <div class="prose" set:html={md(h.aboutText)} />
+      </div>
+      <div class="area card">
+        <h2><Icon name="map" size={26} /> {h.areaTitle}</h2>
+        <p>{h.areaText}</p>
+        <ul class="chips">
+          {settings.areas.map((a) => <li>{a}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {reviews.length > 0 && (
+    <section class="section section-soft" data-section="reviews">
+      <div class="container">
+        <h2 class="section-title">{h.reviewsTitle}</h2>
+        <div class="reviews-grid">
+          {reviews.map((r) => (
+            <figure class="review card">
+              <div class="stars" aria-label={`${r.rating}/5`}>
+                {Array.from({ length: r.rating || 5 }).map(() => <Icon name="star" size={18} />)}
+              </div>
+              <blockquote>{r.text}</blockquote>
+              <figcaption><strong>{r.name}</strong>{r.city && <span> · {r.city}</span>}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section id="faq" class="section" data-section="faq">
+    <div class="container narrow">
+      <h2 class="section-title">{h.faqTitle}</h2>
+      <div class="faq">
+        {h.faq.map((f: { q: string; a: string }) => (
+          <details>
+            <summary>{f.q}<Icon name="chevron" size={20} /></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ContactSection lang={lang} title={h.contactTitle} text={h.contactText} />
+</Base>

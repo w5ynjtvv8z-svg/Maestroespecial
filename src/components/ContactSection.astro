@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+import ContactForm from './ContactForm.astro';
+import { ui, type Lang } from '../lib/i18n';
+import { settings, telHref, waHref } from '../lib/data';
+interface Props { lang: Lang; title: string; text: string; preselect?: string }
+const { lang, title, text, preselect } = Astro.props;
+const t = ui[lang];
+---
+<section id="contacto" class="section section-dark contact" data-section="contact">
+  <div class="container contact-grid">
+    <div>
+      <h2 class="section-title left">{title}</h2>
+      <p class="lead">{text}</p>
+      <div class="contact-buttons">
+        <a href={telHref()} class="btn btn-red btn-lg" data-track-location="contact">
+          <Icon name="phone" /> {settings.phone}
+        </a>
+        <a href={waHref(t.waMessage)} class="btn btn-wa btn-lg" target="_blank" rel="noopener" data-track-location="contact">
+          <Icon name="whatsapp" /> {t.writeWhatsapp}
+        </a>
+      </div>
+      <p class="contact-note"><Icon name="camera" size={20} /> {t.sendPhotos}</p>
+    </div>
+    <ContactForm lang={lang} preselect={preselect} />
+  </div>
+</section>

@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import ContactSection from './ContactSection.astro';
+import { LANGS, ui, homePath, servicePath, type Lang } from '../lib/i18n';
+import { settings, getServices, getServiceById, getHome, md, telHref, waHref } from '../lib/data';
+import { serviceSchema, breadcrumbSchema } from '../lib/schema';
+
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const t = ui[lang];
+const h = getHome(lang);
+const s = getServiceById(lang, id)!;
+const others = getServices(lang).filter((o) => o.id !== id);
+const url = servicePath(lang, s.slug);
+
+// Адрес этой услуги на других языках (у каждого языка свой slug)
+const alternates = Object.fromEntries(
+  LANGS.map((l) => {
+    const alt = getServiceById(l, id);
+    return [l, alt ? servicePath(l, alt.slug) : homePath(l)];
+  }),
+) as Record<Lang, string>;
+
+const crumbs = [
+  { name: t.home, url: homePath(lang) },
+  { name: s.title, url },
+];
+---
+<Base
+  lang={lang}
+  title={s.seoTitle || s.title}
+  description={s.seoDescription || s.short}
+  alternates={alternates}
+  jsonLd={[serviceSchema(s, url), breadcrumbSchema(crumbs)]}
+  ogImage={s.image || undefined}
+>
+  <section class="hero hero-small" data-section="hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href={homePath(lang)}>{t.home}</a> <span>/</span> <span>{s.title}</span>
+      </nav>
+      <div class="service-hero">
+        <div class="service-icon big"><Icon name={s.icon} size={44} /></div>
+        <div>
+          <h1>{s.title}</h1>
+          <p class="lead">{s.short}</p>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href={telHref()} class="btn btn-red btn-lg" data-track-location="service_hero">
+          <Icon name="phone" /> {settings.phone}
+        </a>
+        <a href={waHref(t.waMessage + s.title)} class="btn btn-wa btn-lg" target="_blank" rel="noopener" data-track-location="service_hero">
+          <Icon name="whatsapp" /> {t.sendPhotos}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" data-section="service_body">
+    <div class="container service-layout">
+      <div>
+        {s.image && <img src={s.image} alt={s.title} class="service-photo" />}
+        <div class="prose" set:html={md(s.body)} />
+      </div>
+      <aside class="card what-we-do">
+        <h2>{t.whatWeDo}</h2>
+        <ul class="checklist">
+          {s.items.map((it) => <li><Icon name="check" size={18} /> {it}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-soft" data-section="other_services">
+    <div class="container">
+      <h2 class="section-title">{t.otherServices}</h2>
+      <div class="services-grid small">
+        {others.map((o) => (
+          <a href={servicePath(lang, o.slug)} class="service-card card link-card" data-track="click_cta" data-track-label={`service:${o.id}`}>
+            <div class="service-icon"><Icon name={o.icon} size={30} /></div>
+            <h3>{o.title}</h3>
+            <p>{o.short}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ContactSection lang={lang} title={h.contactTitle} text={h.contactText} preselect={id} />
+</Base>

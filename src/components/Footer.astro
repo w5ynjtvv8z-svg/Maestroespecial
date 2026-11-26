@@ -1,0 +1,49 @@
+---
+import Icon from './Icon.astro';
+import { ui, privacyPath, servicePath, type Lang } from '../lib/i18n';
+import { settings, getServices, telHref, waHref } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+const services = getServices(lang);
+const socials = [
+  { href: settings.instagram, icon: 'instagram', label: 'Instagram' },
+  { href: settings.youtube, icon: 'youtube', label: 'YouTube' },
+  { href: settings.tiktok, icon: 'tiktok', label: 'TikTok' },
+].filter((s) => s.href);
+const year = new Date().getFullYear();
+---
+<footer class="site-footer" data-section="footer">
+  <div class="container footer-grid">
+    <div>
+      <img src="/images/logo.png" alt={settings.brand} width="196" height="113" class="footer-logo" loading="lazy" />
+      <p class="muted">{settings.areas.slice(0, 2).join(' · ')} — {t.areaAll}</p>
+    </div>
+    <div>
+      <h3>{t.navServices}</h3>
+      <ul class="footer-links">
+        {services.map((s) => <li><a href={servicePath(lang, s.slug)}>{s.title}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h3>{t.navContact}</h3>
+      <ul class="footer-links">
+        <li><a href={telHref()}><Icon name="phone" size={16} /> {settings.phone}</a></li>
+        <li><a href={waHref(t.waMessage)} target="_blank" rel="noopener"><Icon name="whatsapp" size={16} /> WhatsApp</a></li>
+        {settings.email && <li><a href={`mailto:${settings.email}`}>{settings.email}</a></li>}
+      </ul>
+      <div class="socials" aria-label={t.followUs}>
+        {socials.map((s) => (
+          <a href={s.href} target="_blank" rel="noopener" aria-label={s.label}><Icon name={s.icon} size={22} /></a>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {year} {settings.companyName}{settings.nif ? ` · NIF ${settings.nif}` : ''}. {t.rights}</span>
+    <span>
+      <a href={privacyPath(lang)}>{t.privacy}</a> ·
+      <button type="button" class="link-btn" data-cookie-settings>{t.cookieSettings}</button>
+    </span>
+  </div>
+</footer>

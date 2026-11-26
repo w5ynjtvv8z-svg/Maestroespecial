@@ -1,0 +1,59 @@
+{
+  "es": {
+    "order": 3,
+    "icon": "pool",
+    "image": "",
+    "slug": "piscinas",
+    "title": "Piscinas: instalación y mantenimiento",
+    "short": "Equipos de piscina, filtración, cloradores salinos, dosificación pH/RX y bombas de calor.",
+    "items": [
+      "Instalación de equipos de piscina",
+      "Filtración con arena y cartucho",
+      "Cloradores salinos",
+      "Estaciones automáticas de dosificación pH/RX",
+      "Bombas de calor para piscinas",
+      "Puesta en marcha, mantenimiento y preparación para la temporada"
+    ],
+    "body": "¿Agua turbia, el filtro no funciona como debería o la piscina necesita ponerse a punto para el verano? Instalamos y mantenemos todo el equipo técnico de la piscina para que el agua esté limpia y el sistema funcione sin sorpresas.\n\nTrabajamos con **cloradores salinos**, **dosificación automática de pH y redox**, filtración de arena y cartucho, y **bombas de calor** para alargar la temporada de baño.\n\nViviendas particulares, comunidades y negocios en Valencia, Sagunto y alrededores.",
+    "seoTitle": "Mantenimiento e instalación de piscinas en Valencia y Sagunto",
+    "seoDescription": "Instalación de equipos de piscina, filtración, cloradores salinos, dosificación pH/RX y bombas de calor en Valencia y Sagunto. Puesta en marcha y mantenimiento."
+  },
+  "ru": {
+    "order": 3,
+    "icon": "pool",
+    "image": "",
+    "slug": "basseyny",
+    "title": "Бассейны — монтаж и обслуживание",
+    "short": "Бассейновое оборудование, фильтрация, солевые хлораторы, дозирование pH/RX, тепловые насосы.",
+    "items": [
+      "Монтаж бассейнового оборудования",
+      "Песочные и картриджные системы фильтрации",
+      "Солевые хлораторы",
+      "Автоматические станции дозирования pH/RX",
+      "Тепловые насосы для бассейнов",
+      "Запуск, обслуживание и подготовка к сезону"
+    ],
+    "body": "Мутная вода, фильтр работает не так, как должен, или бассейн пора готовить к лету? Мы монтируем и обслуживаем всё техническое оборудование бассейна, чтобы вода была чистой, а система работала без сюрпризов.\n\nРаботаем с **солевыми хлораторами**, **автоматическим дозированием pH и RX**, песочной и картриджной фильтрацией, а также **тепловыми насосами**, которые продлевают купальный сезон.\n\nЧастные дома, жилые комплексы и бизнес в Валенсии, Сагунто и окрестностях.",
+    "seoTitle": "Обслуживание и монтаж бассейнов в Валенсии и Сагунто",
+    "seoDescription": "Монтаж бассейнового оборудования, фильтрация, солевые хлораторы, дозирование pH/RX и тепловые насосы в Валенсии и Сагунто. Запуск и обслуживание."
+  },
+  "en": {
+    "order": 3,
+    "icon": "pool",
+    "image": "",
+    "slug": "swimming-pools",
+    "title": "Swimming pools: installation and maintenance",
+    "short": "Pool equipment, filtration, salt chlorinators, pH/RX dosing and pool heat pumps.",
+    "items": [
+      "Installation of pool equipment",
+      "Sand and cartridge filtration systems",
+      "Salt chlorinators",
+      "Automatic pH/RX dosing stations",
+      "Heat pumps for swimming pools",
+      "Start-up, maintenance and seasonal preparation"
+    ],
+    "body": "Cloudy water, a filter that is not doing its job, or a pool that needs to be ready for summer? We install and maintain all the technical equipment of your pool so the water stays clean and the system runs without surprises.\n\nWe work with **salt chlorinators**, **automatic pH and redox dosing**, sand and cartridge filtration, and **heat pumps** that extend the swimming season.\n\nPrivate homes, residential communities and businesses in Valencia, Sagunto and the surrounding area.",
+    "seoTitle": "Swimming pool installation and maintenance in Valencia",
+    "seoDescription": "Pool equipment installation, filtration, salt chlorinators, pH/RX dosing and pool heat pumps in Valencia and Sagunto. Start-up and maintenance."
+  }
+}

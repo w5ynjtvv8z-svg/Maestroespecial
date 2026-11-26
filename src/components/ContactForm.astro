@@ -1,0 +1,88 @@
+---
+/**
+ * Форма заявки. Принимается через Netlify Forms:
+ * заявки видны в панели Netlify (Forms → lead), там же включаются уведомления на e-mail.
+ */
+import { ui, privacyPath, type Lang } from '../lib/i18n';
+import { getServices } from '../lib/data';
+interface Props { lang: Lang; preselect?: string }
+const { lang, preselect } = Astro.props;
+const t = ui[lang];
+const services = getServices(lang);
+---
+<form
+  class="lead-form card"
+  name="lead"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  data-ok={t.formOk}
+  data-error={t.formError}
+  data-sending={t.formSending}
+>
+  <h3>{t.formTitle}</h3>
+  <input type="hidden" name="form-name" value="lead" />
+  <input type="hidden" name="lang" value={lang} />
+  <input type="hidden" name="page" value="" />
+  <p class="hp" aria-hidden="true"><label>Bot <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+  <label class="field">
+    <span>{t.formName}</span>
+    <input type="text" name="name" required autocomplete="name" />
+  </label>
+  <label class="field">
+    <span>{t.formPhone}</span>
+    <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+34 …" />
+  </label>
+  <label class="field">
+    <span>{t.formService}</span>
+    <select name="service">
+      {services.map((s) => <option value={s.title} selected={s.id === preselect}>{s.title}</option>)}
+      <option value="other">{t.formServiceOther}</option>
+    </select>
+  </label>
+  <label class="field">
+    <span>{t.formMessage}</span>
+    <textarea name="message" rows="3"></textarea>
+  </label>
+  <label class="check">
+    <input type="checkbox" name="consent" value="yes" required />
+    <span>{t.formConsent} <a href={privacyPath(lang)} target="_blank">{t.formConsentLink}</a></span>
+  </label>
+  <button type="submit" class="btn btn-red btn-block">{t.formSubmit}</button>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.lead-form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.querySelector<HTMLElement>('.form-status')!;
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      (form.elements.namedItem('page') as HTMLInputElement).value = location.pathname;
+      const label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = form.dataset.sending!;
+      try {
+        const body = new URLSearchParams(new FormData(form) as any).toString();
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body,
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        status.textContent = form.dataset.ok!;
+        status.className = 'form-status ok';
+        const service = (form.elements.namedItem('service') as HTMLSelectElement).value;
+        (window as any).meTrack?.('generate_lead', { location: 'form', label: service });
+        form.reset();
+      } catch {
+        status.textContent = form.dataset.error!;
+        status.className = 'form-status err';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  });
+</script>

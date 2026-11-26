@@ -1,0 +1,169 @@
+# Админ-панель сайта Maestro Especial (Decap CMS).
+# Открывается по адресу https://<ваш-домен>/admin/
+# Каждое сохранение в админке = коммит в GitHub → Netlify сам пересобирает сайт (1–2 минуты).
+
+backend:
+  name: github
+  repo: w5ynjtvv8z-svg/Maestroespecial
+  branch: main
+  commit_messages:
+    create: 'Админка: создано {{collection}} «{{slug}}»'
+    update: 'Админка: изменено {{collection}} «{{slug}}»'
+    delete: 'Админка: удалено {{collection}} «{{slug}}»'
+    uploadMedia: 'Админка: загружено фото «{{path}}»'
+    deleteMedia: 'Админка: удалено фото «{{path}}»'
+
+# Для локальной проверки: `npm run cms` + `npm run dev`, затем http://localhost:4321/admin/
+local_backend: true
+
+locale: ru
+site_url: https://www.maestroespecial.es
+display_url: https://www.maestroespecial.es
+logo_url: /images/logo.png
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+i18n:
+  structure: single_file
+  locales: [es, ru, en]
+  default_locale: es
+
+collections:
+  # ---------- Настройки ----------
+  - name: settings
+    label: '⚙️ Настройки сайта'
+    editor: { preview: false }
+    files:
+      - name: settings
+        label: 'Контакты, соцсети, аналитика'
+        file: src/data/settings.json
+        fields:
+          - { name: siteUrl, label: 'Адрес сайта (домен)', widget: string, hint: 'Например https://www.maestroespecial.es — без слэша в конце' }
+          - { name: companyName, label: 'Юридическое название', widget: string }
+          - { name: brand, label: 'Название бренда', widget: string }
+          - { name: ownerName, label: 'Имя мастера', widget: string }
+          - { name: phone, label: 'Телефон (как показывать)', widget: string, hint: '+34 652 920 274' }
+          - { name: whatsapp, label: 'Номер WhatsApp (только цифры)', widget: string, hint: '34652920274' }
+          - { name: email, label: 'E-mail', widget: string, required: false }
+          - { name: nif, label: 'NIF / CIF компании', widget: string, required: false, hint: 'Нужен по закону для страницы «Правовая информация»' }
+          - { name: address, label: 'Адрес (улица, дом)', widget: string, required: false }
+          - { name: postalCode, label: 'Почтовый индекс', widget: string, required: false }
+          - { name: city, label: 'Город', widget: string }
+          - { name: region, label: 'Регион', widget: string }
+          - { name: yearsExperience, label: 'Лет опыта', widget: number, value_type: int }
+          - { name: openingHours, label: 'Часы работы (для Google)', widget: string, required: false, hint: 'Формат: Mo-Sa 08:00-20:00' }
+          - { name: areas, label: 'Города / районы работы', widget: list, hint: 'Через запятую' }
+          - { name: instagram, label: 'Instagram', widget: string, required: false }
+          - { name: youtube, label: 'YouTube', widget: string, required: false }
+          - { name: tiktok, label: 'TikTok', widget: string, required: false }
+          - { name: googleMapsUrl, label: 'Ссылка на карточку Google Maps', widget: string, required: false }
+          - { name: ga4Id, label: 'Google Analytics 4 — ID', widget: string, required: false, hint: 'Вида G-XXXXXXXXXX' }
+          - { name: clarityId, label: 'Microsoft Clarity — ID проекта', widget: string, required: false }
+          - { name: googleSiteVerification, label: 'Код подтверждения Google Search Console', widget: string, required: false, hint: 'Только значение content из мета-тега' }
+
+  # ---------- Главная страница ----------
+  - name: pages
+    label: '🏠 Страницы'
+    i18n: true
+    files:
+      - name: home
+        label: 'Главная страница'
+        file: src/data/home.json
+        i18n: true
+        fields:
+          - { name: seoTitle, label: 'SEO: заголовок для Google', widget: string, i18n: true, hint: 'До ~60 символов' }
+          - { name: seoDescription, label: 'SEO: описание для Google', widget: text, i18n: true, hint: 'До ~160 символов' }
+          - { name: heroBadge, label: 'Плашка над заголовком', widget: string, i18n: true }
+          - { name: heroTitle, label: 'Главный заголовок (H1)', widget: string, i18n: true }
+          - { name: heroSubtitle, label: 'Подзаголовок', widget: text, i18n: true }
+          - { name: heroImage, label: 'Фоновое фото первого экрана', widget: image, required: false, i18n: duplicate }
+          - { name: problemsTitle, label: 'Блок «Проблемы»: заголовок', widget: string, i18n: true }
+          - { name: problems, label: 'Список проблем', widget: list, i18n: true }
+          - { name: problemsText, label: 'Блок «Проблемы»: текст', widget: text, i18n: true }
+          - { name: servicesTitle, label: 'Заголовок блока услуг', widget: string, i18n: true }
+          - { name: whyTitle, label: 'Заголовок «Почему мы»', widget: string, i18n: true }
+          - name: why
+            label: 'Преимущества'
+            widget: list
+            i18n: true
+            fields:
+              - { name: title, label: 'Заголовок', widget: string }
+              - { name: text, label: 'Текст', widget: text }
+          - { name: aboutTitle, label: 'Заголовок «О нас»', widget: string, i18n: true }
+          - { name: aboutText, label: 'Текст «О нас»', widget: markdown, i18n: true }
+          - { name: aboutImage, label: 'Фото мастера', widget: image, required: false, i18n: duplicate }
+          - { name: areaTitle, label: 'Заголовок «Где работаем»', widget: string, i18n: true }
+          - { name: areaText, label: 'Текст «Где работаем»', widget: text, i18n: true }
+          - { name: reviewsTitle, label: 'Заголовок отзывов', widget: string, i18n: true }
+          - { name: faqTitle, label: 'Заголовок вопросов', widget: string, i18n: true }
+          - name: faq
+            label: 'Вопросы и ответы'
+            widget: list
+            i18n: true
+            fields:
+              - { name: q, label: 'Вопрос', widget: string }
+              - { name: a, label: 'Ответ', widget: text }
+          - { name: contactTitle, label: 'Блок контактов: заголовок', widget: string, i18n: true }
+          - { name: contactText, label: 'Блок контактов: текст', widget: text, i18n: true }
+
+      - name: privacy
+        label: 'Правовая информация и cookies'
+        file: src/data/privacy.json
+        i18n: true
+        fields:
+          - { name: title, label: 'Заголовок', widget: string, i18n: true }
+          - { name: body, label: 'Текст', widget: markdown, i18n: true }
+
+  # ---------- Услуги ----------
+  - name: services
+    label: '🔧 Услуги'
+    label_singular: 'Услуга'
+    folder: src/data/services
+    extension: json
+    format: json
+    create: true
+    i18n: true
+    slug: '{{fields.slug}}'
+    identifier_field: title
+    summary: '{{order}}. {{title}}'
+    sortable_fields: [order, title]
+    fields:
+      - { name: order, label: 'Порядок на сайте', widget: number, value_type: int, i18n: duplicate }
+      - name: icon
+        label: 'Иконка'
+        widget: select
+        i18n: duplicate
+        options:
+          - { label: 'Труба (сантехника)', value: pipe }
+          - { label: 'Пламя (отопление)', value: flame }
+          - { label: 'Бассейн', value: pool }
+          - { label: 'Капля (вода)', value: drop }
+          - { label: 'Инструмент', value: tool }
+          - { label: 'Щит', value: shield }
+      - { name: image, label: 'Фото', widget: image, required: false, i18n: duplicate }
+      - { name: title, label: 'Название услуги', widget: string, i18n: true }
+      - { name: slug, label: 'Адрес страницы (латиницей, через дефис)', widget: string, i18n: true, pattern: ['^[a-z0-9-]+$', 'Только латинские буквы, цифры и дефис'] }
+      - { name: short, label: 'Короткое описание (для карточки)', widget: text, i18n: true }
+      - { name: items, label: 'Что входит (список)', widget: list, i18n: true }
+      - { name: body, label: 'Подробный текст страницы', widget: markdown, i18n: true }
+      - { name: seoTitle, label: 'SEO: заголовок для Google', widget: string, required: false, i18n: true }
+      - { name: seoDescription, label: 'SEO: описание для Google', widget: text, required: false, i18n: true }
+
+  # ---------- Отзывы ----------
+  - name: reviews
+    label: '⭐ Отзывы'
+    label_singular: 'Отзыв'
+    folder: src/data/reviews
+    extension: json
+    format: json
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    identifier_field: name
+    summary: '{{name}} — {{rating}}★'
+    fields:
+      - { name: name, label: 'Имя клиента', widget: string }
+      - { name: city, label: 'Город', widget: string, required: false }
+      - { name: rating, label: 'Оценка (1–5)', widget: number, value_type: int, min: 1, max: 5, default: 5 }
+      - { name: text, label: 'Текст отзыва', widget: text, hint: 'Публикуйте только настоящие отзывы клиентов' }
+      - { name: date, label: 'Дата', widget: datetime, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY', time_format: false }

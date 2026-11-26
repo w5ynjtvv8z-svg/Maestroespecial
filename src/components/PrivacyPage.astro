@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { LANGS, privacyPath, type Lang } from '../lib/i18n';
+import { settings, getPrivacy, md, telHref } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const p = getPrivacy(lang);
+const alternates = Object.fromEntries(LANGS.map((l) => [l, privacyPath(l)])) as Record<Lang, string>;
+---
+<Base lang={lang} title={p.title} description={p.title} alternates={alternates} noindex>
+  <section class="section">
+    <div class="container narrow prose">
+      <h1>{p.title}</h1>
+      <ul class="legal-data">
+        <li><strong>{settings.companyName}</strong></li>
+        {settings.nif && <li>NIF: {settings.nif}</li>}
+        {settings.address && <li>{settings.address}{settings.postalCode ? `, ${settings.postalCode}` : ''} {settings.city}</li>}
+        <li><a href={telHref()}>{settings.phone}</a></li>
+        {settings.email && <li><a href={`mailto:${settings.email}`}>{settings.email}</a></li>}
+      </ul>
+      <Fragment set:html={md(p.body)} />
+    </div>
+  </section>
+</Base>

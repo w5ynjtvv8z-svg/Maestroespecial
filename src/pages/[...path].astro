@@ -1,0 +1,29 @@
+---
+// Все страницы сайта на трёх языках генерируются отсюда.
+//   ES (основной): /              /servicios/<slug>/   /privacidad/
+//   RU:            /ru/           /ru/uslugi/<slug>/   /ru/konfidencialnost/
+//   EN:            /en/           /en/services/<slug>/ /en/privacy/
+import HomePage from '../components/HomePage.astro';
+import ServicePage from '../components/ServicePage.astro';
+import PrivacyPage from '../components/PrivacyPage.astro';
+import { LANGS, homePath, servicePath, privacyPath, type Lang } from '../lib/i18n';
+import { getServices } from '../lib/data';
+
+export function getStaticPaths() {
+  // '/ru/uslugi/x/' -> 'ru/uslugi/x'; '/' -> undefined
+  const toParam = (url: string) => url.replace(/^\/|\/$/g, '') || undefined;
+  return LANGS.flatMap((lang) => [
+    { params: { path: toParam(homePath(lang)) }, props: { kind: 'home', lang } },
+    { params: { path: toParam(privacyPath(lang)) }, props: { kind: 'privacy', lang } },
+    ...getServices(lang).map((s) => ({
+      params: { path: toParam(servicePath(lang, s.slug)) },
+      props: { kind: 'service', lang, id: s.id },
+    })),
+  ]);
+}
+
+const { kind, lang, id } = Astro.props as { kind: string; lang: Lang; id?: string };
+---
+{kind === 'home' && <HomePage lang={lang} />}
+{kind === 'service' && <ServicePage lang={lang} id={id!} />}
+{kind === 'privacy' && <PrivacyPage lang={lang} />}

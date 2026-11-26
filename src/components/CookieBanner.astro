@@ -1,0 +1,30 @@
+---
+import { ui, privacyPath, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+<div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
+  <p>{t.cookieText} <a href={privacyPath(lang)}>{t.privacy}</a></p>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-outline" data-consent="deny">{t.cookieReject}</button>
+    <button type="button" class="btn btn-red" data-consent="grant">{t.cookieAccept}</button>
+  </div>
+</div>
+
+<script>
+  const banner = document.querySelector<HTMLElement>('.cookie-banner')!;
+  let stored: string | null = null;
+  try { stored = localStorage.getItem('me-consent'); } catch {}
+  if (!stored) banner.hidden = false;
+
+  banner.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((b) =>
+    b.addEventListener('click', () => {
+      (window as any).meSetConsent?.(b.dataset.consent === 'grant');
+      banner.hidden = true;
+    }),
+  );
+  document.querySelectorAll('[data-cookie-settings]').forEach((b) =>
+    b.addEventListener('click', () => { banner.hidden = false; }),
+  );
+</script>

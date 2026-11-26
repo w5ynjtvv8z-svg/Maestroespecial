@@ -1,0 +1,56 @@
+{
+  "es": {
+    "order": 2,
+    "icon": "flame",
+    "image": "",
+    "slug": "calefaccion-aerotermia",
+    "title": "Calefacción y aerotermia",
+    "short": "Instalación y cambio de calderas, radiadores, suelo radiante y sistemas de aerotermia.",
+    "items": [
+      "Instalación y sustitución de calderas",
+      "Instalación de radiadores y suelo radiante",
+      "Instalación de sistemas de aerotermia",
+      "Limpieza de circuitos de calefacción e intercambiadores",
+      "Diagnóstico, reparación y optimización de la calefacción"
+    ],
+    "body": "¿La calefacción no calienta bien, los radiadores están fríos por arriba o la factura de energía no para de subir? Hacemos un diagnóstico técnico de toda la instalación y proponemos la solución correcta, no un parche.\n\nInstalamos **aerotermia** — una de las formas más eficientes de calefacción y agua caliente sanitaria — así como calderas, radiadores y suelo radiante. También limpiamos circuitos e intercambiadores para recuperar el rendimiento de sistemas existentes.\n\nTrabajamos en Valencia, Sagunto y alrededores. Precio acordado antes de empezar y factura por todos los trabajos.",
+    "seoTitle": "Calefacción y aerotermia en Valencia — instalación y reparación",
+    "seoDescription": "Instalación de aerotermia, calderas, radiadores y suelo radiante en Valencia y Sagunto. Limpieza de circuitos y reparación de calefacción. Más de 26 años de experiencia."
+  },
+  "ru": {
+    "order": 2,
+    "icon": "flame",
+    "image": "",
+    "slug": "otoplenie-aerotermiya",
+    "title": "Отопление и аэротермия",
+    "short": "Монтаж и замена котлов, радиаторов, тёплых полов и систем аэротермии.",
+    "items": [
+      "Монтаж и замена котлов",
+      "Установка радиаторов и тёплых полов",
+      "Монтаж систем аэротермии",
+      "Промывка отопительных систем и теплообменников",
+      "Диагностика, ремонт и оптимизация отопления"
+    ],
+    "body": "Отопление плохо греет, радиаторы холодные сверху или счета за энергию постоянно растут? Мы проводим техническую диагностику всей системы и предлагаем правильное решение, а не временную «заплатку».\n\nМонтируем **аэротермию** — один из самых эффективных способов отопления и горячего водоснабжения, — а также котлы, радиаторы и тёплые полы. Промываем системы отопления и теплообменники, чтобы вернуть производительность существующему оборудованию.\n\nРаботаем в Валенсии, Сагунто и окрестностях. Стоимость согласовывается до начала работ, выставляем factura.",
+    "seoTitle": "Отопление и аэротермия в Валенсии — монтаж и ремонт",
+    "seoDescription": "Монтаж аэротермии, котлов, радиаторов и тёплых полов в Валенсии и Сагунто. Промывка систем и ремонт отопления. Опыт более 26 лет, русскоязычный мастер."
+  },
+  "en": {
+    "order": 2,
+    "icon": "flame",
+    "image": "",
+    "slug": "heating-aerothermal",
+    "title": "Heating and aerothermal heat pumps",
+    "short": "Installation and replacement of boilers, radiators, underfloor heating and aerothermal systems.",
+    "items": [
+      "Boiler installation and replacement",
+      "Radiators and underfloor heating",
+      "Aerothermal (air-to-water heat pump) systems",
+      "Flushing of heating circuits and heat exchangers",
+      "Heating diagnostics, repair and optimisation"
+    ],
+    "body": "Heating not warming up properly, radiators cold at the top or energy bills that keep rising? We run a technical diagnosis of the whole system and propose the right solution, not a quick patch.\n\nWe install **aerothermal heat pumps** — one of the most efficient ways to provide heating and hot water — as well as boilers, radiators and underfloor heating. We also flush circuits and heat exchangers to restore the performance of existing systems.\n\nWe work in Valencia, Sagunto and the surrounding area. Price agreed before work starts, invoice provided.",
+    "seoTitle": "Heating and aerothermal heat pumps in Valencia — installation & repair",
+    "seoDescription": "Aerothermal heat pumps, boilers, radiators and underfloor heating in Valencia and Sagunto. Heating system flushing and repair. 26+ years of experience."
+  }
+}

@@ -1,0 +1,17 @@
+---
+// Липкая панель внизу экрана на телефоне: «Позвонить» + «WhatsApp»
+import Icon from './Icon.astro';
+import { ui, type Lang } from '../lib/i18n';
+import { telHref, waHref } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+<div class="mobile-bar" data-section="mobile_bar">
+  <a href={telHref()} class="btn btn-dark" data-track-location="mobile_bar">
+    <Icon name="phone" size={20} /> {t.call}
+  </a>
+  <a href={waHref(t.waMessage)} class="btn btn-wa" target="_blank" rel="noopener" data-track-location="mobile_bar">
+    <Icon name="whatsapp" size={20} /> {t.whatsapp}
+  </a>
+</div>

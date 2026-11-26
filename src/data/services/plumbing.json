@@ -1,0 +1,56 @@
+{
+  "es": {
+    "order": 1,
+    "icon": "pipe",
+    "image": "",
+    "slug": "fontaneria",
+    "title": "Fontanería y suministro de agua",
+    "short": "Instalación y cambio de tuberías, reparación de fugas y atascos, recuperación de la presión del agua.",
+    "items": [
+      "Instalación y sustitución de tuberías de cualquier complejidad",
+      "Reparación de fugas, atascos y averías",
+      "Recuperación de la presión normal del agua",
+      "Limpieza y lavado de instalaciones de agua",
+      "Instalación y modernización de sistemas de ingeniería"
+    ],
+    "body": "¿Gotea una tubería, tiene poca presión de agua o un atasco que vuelve una y otra vez? Gastar dinero en soluciones temporales sale caro. Primero localizamos la **causa real** de la avería y después la reparamos de forma profesional y duradera.\n\nCon más de 26 años de experiencia trabajamos en viviendas, comunidades y locales comerciales de Valencia, Sagunto y alrededores. Antes de empezar acordamos el precio y emitimos **factura** por todos los trabajos a través de Maestro Especial S.L.\n\n**Consejo:** envíe por WhatsApp fotos o un vídeo de la avería y le daremos una valoración previa.",
+    "seoTitle": "Fontanero en Valencia y Sagunto — fugas, atascos, tuberías",
+    "seoDescription": "Fontanero con más de 26 años de experiencia en Valencia y Sagunto: fugas, atascos, cambio de tuberías, presión de agua. Precio acordado antes de empezar. Factura."
+  },
+  "ru": {
+    "order": 1,
+    "icon": "pipe",
+    "image": "",
+    "slug": "santehnika",
+    "title": "Сантехника и водоснабжение",
+    "short": "Монтаж и замена труб, устранение протечек и засоров, восстановление нормального давления воды.",
+    "items": [
+      "Монтаж и замена трубопроводов любой сложности",
+      "Устранение протечек, засоров и неисправностей",
+      "Восстановление нормального давления воды",
+      "Промывка систем водоснабжения",
+      "Монтаж и модернизация инженерных систем"
+    ],
+    "body": "Протекают трубы, слабый напор воды или засор, который возвращается снова и снова? Не стоит тратить деньги на временные решения и бесконечные переделки. Сначала мы находим **настоящую причину** неисправности, а затем устраняем её профессионально и надолго.\n\nБолее 26 лет опыта: квартиры, частные дома, жилые комплексы и коммерческие помещения в Валенсии, Сагунто и окрестностях. Стоимость согласовывается до начала работ, на все работы выставляется **factura** от Maestro Especial S.L.\n\n**Совет:** отправьте в WhatsApp фото или видео неисправности — предварительно оценим ситуацию и обсудим решение.",
+    "seoTitle": "Сантехник в Валенсии и Сагунто — протечки, засоры, трубы",
+    "seoDescription": "Русскоязычный сантехник в Валенсии и Сагунто, опыт более 26 лет: протечки, засоры, замена труб, давление воды. Цена до начала работ. Factura."
+  },
+  "en": {
+    "order": 1,
+    "icon": "pipe",
+    "image": "",
+    "slug": "plumbing",
+    "title": "Plumbing and water supply",
+    "short": "Pipe installation and replacement, leak and blockage repair, restoring normal water pressure.",
+    "items": [
+      "Installation and replacement of pipework of any complexity",
+      "Repair of leaks, blockages and faults",
+      "Restoring normal water pressure",
+      "Flushing of water supply systems",
+      "Installation and upgrade of building services"
+    ],
+    "body": "Leaking pipes, low water pressure or a blockage that keeps coming back? Temporary fixes end up costing more. We first find the **real cause** of the problem and then fix it properly and for the long term.\n\nWith more than 26 years of experience we work in flats, houses, communities and commercial premises in Valencia, Sagunto and the surrounding area. The price is agreed before any work starts and every job is invoiced (**factura**) by Maestro Especial S.L.\n\n**Tip:** send photos or a video of the problem via WhatsApp and we will give you a preliminary assessment.",
+    "seoTitle": "Plumber in Valencia and Sagunto — leaks, blockages, pipes",
+    "seoDescription": "English-speaking plumber in Valencia and Sagunto with 26+ years of experience: leaks, blockages, pipe replacement, water pressure. Price agreed upfront. Invoice provided."
+  }
+}

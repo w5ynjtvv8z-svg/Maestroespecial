@@ -1,0 +1,56 @@
+{
+  "es": {
+    "order": 4,
+    "icon": "drop",
+    "image": "",
+    "slug": "tratamiento-agua",
+    "title": "Tratamiento y depuración de agua",
+    "short": "Descalcificadores, filtros, ósmosis inversa y tratamiento de agua de pozo.",
+    "items": [
+      "Instalación de descalcificadores",
+      "Filtros de sedimentos y de filtración fina",
+      "Sistemas de ósmosis inversa",
+      "Tratamiento de agua de pozo",
+      "Instalación, ajuste y mantenimiento de equipos"
+    ],
+    "body": "El agua de Valencia es muy dura: la cal estropea calentadores, grifos, electrodomésticos y tuberías. Un **descalcificador** bien dimensionado y ajustado alarga la vida de toda la instalación.\n\nInstalamos filtros de sedimentos y de filtración fina, equipos de **ósmosis inversa** para agua de beber y sistemas de **tratamiento de agua de pozo**. Analizamos su caso, elegimos el equipo adecuado, lo instalamos, lo ajustamos y realizamos su mantenimiento.\n\nValencia, Sagunto y alrededores. Precio acordado antes de empezar, factura incluida.",
+    "seoTitle": "Descalcificadores y ósmosis inversa en Valencia — instalación",
+    "seoDescription": "Instalación y mantenimiento de descalcificadores, filtros, ósmosis inversa y tratamiento de agua de pozo en Valencia y Sagunto. Más de 26 años de experiencia."
+  },
+  "ru": {
+    "order": 4,
+    "icon": "drop",
+    "image": "",
+    "slug": "ochistka-vody",
+    "title": "Системы очистки и подготовки воды",
+    "short": "Умягчители, фильтры, обратный осмос и очистка воды из скважин.",
+    "items": [
+      "Установка умягчителей воды",
+      "Фильтры грубой и тонкой очистки",
+      "Системы обратного осмоса",
+      "Очистка воды из скважин",
+      "Монтаж, настройка и обслуживание оборудования"
+    ],
+    "body": "Вода в Валенсии очень жёсткая: известковый налёт портит бойлеры, смесители, бытовую технику и трубы. Правильно подобранный и настроенный **умягчитель** продлевает жизнь всей системы.\n\nУстанавливаем фильтры грубой и тонкой очистки, системы **обратного осмоса** для питьевой воды и **очистку воды из скважин**. Разбираемся в вашей ситуации, подбираем оборудование, монтируем, настраиваем и обслуживаем.\n\nВаленсия, Сагунто и окрестности. Стоимость согласовывается до начала работ, выставляем factura.",
+    "seoTitle": "Умягчители и обратный осмос в Валенсии — установка",
+    "seoDescription": "Установка и обслуживание умягчителей воды, фильтров, систем обратного осмоса и очистки воды из скважин в Валенсии и Сагунто. Опыт более 26 лет."
+  },
+  "en": {
+    "order": 4,
+    "icon": "drop",
+    "image": "",
+    "slug": "water-treatment",
+    "title": "Water treatment and filtration",
+    "short": "Water softeners, filters, reverse osmosis and well water treatment.",
+    "items": [
+      "Water softener installation",
+      "Sediment and fine filtration",
+      "Reverse osmosis systems",
+      "Well water treatment",
+      "Installation, adjustment and servicing of equipment"
+    ],
+    "body": "Valencia's water is very hard: limescale damages water heaters, taps, appliances and pipes. A correctly sized and adjusted **water softener** extends the life of your whole installation.\n\nWe install sediment and fine filters, **reverse osmosis** systems for drinking water and **well water treatment** systems. We look at your situation, choose the right equipment, install it, set it up and service it.\n\nValencia, Sagunto and the surrounding area. Price agreed before work starts, invoice included.",
+    "seoTitle": "Water softeners and reverse osmosis in Valencia — installation",
+    "seoDescription": "Installation and servicing of water softeners, filters, reverse osmosis and well water treatment in Valencia and Sagunto. 26+ years of experience."
+  }
+}
