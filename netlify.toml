@@ -12,3 +12,14 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Панель и API не кэшируются и не индексируются
+[[headers]]
+  for = "/panel/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"

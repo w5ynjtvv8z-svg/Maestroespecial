@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { ui, privacyPath, servicePath, type Lang } from '../lib/i18n';
+import { ui, privacyPath, servicePath, myLeadsPath, type Lang } from '../lib/i18n';
 import { settings, getServices, telHref, waHref } from '../lib/data';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -31,6 +31,8 @@ const year = new Date().getFullYear();
         <li><a href={telHref()}><Icon name="phone" size={16} /> {settings.phone}</a></li>
         <li><a href={waHref(t.waMessage)} target="_blank" rel="noopener"><Icon name="whatsapp" size={16} /> WhatsApp</a></li>
         {settings.email && <li><a href={`mailto:${settings.email}`}>{settings.email}</a></li>}
+        <li><a href={myLeadsPath(lang)}>{t.navMyLeads}</a></li>
+        {import.meta.env.PUBLIC_DEMO === '1' && <li><a href="/panel/" class="demo-panel-link">🔐 Панель сантехника (демо)</a></li>}
       </ul>
       <div class="socials" aria-label={t.followUs}>
         {socials.map((s) => (

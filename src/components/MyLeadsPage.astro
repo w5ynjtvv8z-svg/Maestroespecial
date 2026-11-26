@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import { LANGS, ui, myLeadsPath, homePath, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = ui[lang];
+const alternates = Object.fromEntries(LANGS.map((l) => [l, myLeadsPath(l)])) as Record<Lang, string>;
+const labels = { new: t.st_new, accepted: t.st_accepted, done: t.st_done, rejected: t.st_rejected };
+---
+<Base lang={lang} title={t.myLeadsTitle} description={t.myLeadsIntro} alternates={alternates} noindex>
+  <section class="section">
+    <div class="container narrow">
+      <h1>{t.myLeadsTitle}</h1>
+      <p class="muted">{t.myLeadsIntro}</p>
+
+      <div id="my-leads" data-lang={lang} data-labels={JSON.stringify(labels)} data-number={t.myLeadsNumber} data-updated={t.myLeadsUpdated} data-error={t.myLeadsError}>
+        <p class="muted">{t.myLeadsLoading}</p>
+      </div>
+
+      <div id="my-leads-empty" class="card empty" hidden>
+        <Icon name="invoice" size={40} />
+        <p>{t.myLeadsEmpty}</p>
+        <a class="btn btn-red" href={`${homePath(lang)}#contacto`}>{t.myLeadsNew}</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { fetchMyLeads } from '../lib/api';
+  const root = document.getElementById('my-leads')!;
+  const empty = document.getElementById('my-leads-empty')!;
+  const d = root.dataset;
+  const labels = JSON.parse(d.labels!);
+  const locale = { es: 'es-ES', ru: 'ru-RU', en: 'en-GB' }[d.lang as 'es'] || 'es-ES';
+  const fmt = (iso: string) => new Date(iso).toLocaleString(locale, { dateStyle: 'medium', timeStyle: 'short' });
+  const steps = ['new', 'accepted', 'done'];
+
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+  fetchMyLeads()
+    .then((leads) => {
+      if (!leads.length) {
+        root.innerHTML = '';
+        empty.hidden = false;
+        return;
+      }
+      root.innerHTML = leads
+        .map((l) => {
+          const idx = steps.indexOf(l.status);
+          const progress =
+            l.status === 'rejected'
+              ? ''
+              : `<ol class="steps">${steps
+                  .map((s, i) => `<li class="${i <= idx ? 'on' : ''}">${esc(labels[s])}</li>`)
+                  .join('')}</ol>`;
+          return `<article class="my-lead card">
+            <div class="my-lead-head">
+              <strong>${esc(d.number!)} ${esc(l.id)}</strong>
+              <span class="pill pill-${l.status}">${esc(labels[l.status])}</span>
+            </div>
+            <p class="my-lead-meta">${fmt(l.createdAt)} · ${esc(l.service)}</p>
+            ${l.message ? `<p>${esc(l.message)}</p>` : ''}
+            ${progress}
+            ${l.updatedAt !== l.createdAt ? `<p class="my-lead-meta">${esc(d.updated!)}: ${fmt(l.updatedAt)}</p>` : ''}
+          </article>`;
+        })
+        .join('');
+    })
+    .catch(() => {
+      root.innerHTML = `<p class="form-status err">${esc(d.error!)}</p>`;
+    });
+</script>

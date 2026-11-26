@@ -314,5 +314,26 @@ p { margin: 0 0 1em; }
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
-.form-note { margin: 8px 0 0; font-size: .85rem; color: var(--muted); text-align: center; }
-.form-status a { color: var(--wa-dark); font-weight: 700; }
+
+/* ===== Заявка отправлена ===== */
+.form-status .btn { margin-top: 10px; }
+.lead-ok { text-align: center; padding: 12px 0; }
+.lead-ok-icon { width: 68px; height: 68px; border-radius: 50%; background: #e7f6ec; color: var(--wa-dark); display: grid; place-items: center; margin: 0 auto 14px; }
+.lead-ok p { color: var(--muted); }
+.lead-ok-actions { display: grid; gap: 10px; margin-top: 18px; }
+
+/* ===== Мои заявки ===== */
+.my-lead { margin-bottom: 16px; border: 1px solid var(--line); box-shadow: none; }
+.my-lead-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.my-lead-meta { color: var(--muted); font-size: .9rem; margin: 6px 0 10px; }
+.pill { display: inline-block; padding: 3px 12px; border-radius: 999px; font-size: .85rem; font-weight: 700; }
+.pill-new { background: #fff1d6; color: #8a5a00; }
+.pill-accepted { background: #e3eeff; color: #1d4ed8; }
+.pill-done { background: #e7f6ec; color: var(--wa-dark); }
+.pill-rejected { background: #eee; color: #666; }
+.steps { list-style: none; padding: 0; margin: 12px 0 4px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; font-size: .82rem; color: var(--muted); }
+.steps li { border-top: 4px solid var(--line); padding-top: 6px; }
+.steps li.on { border-color: var(--wa); color: var(--text); font-weight: 600; }
+.empty { text-align: center; color: var(--muted); }
+.empty .icon { margin: 0 auto 8px; color: var(--gold); }
+.demo-panel-link { color: var(--gold) !important; font-weight: 700; }

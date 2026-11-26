@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { LANGS, LANG_META, ui, homePath, type Lang } from '../lib/i18n';
+import { LANGS, LANG_META, ui, homePath, myLeadsPath, type Lang } from '../lib/i18n';
 import { settings, telHref } from '../lib/data';
 interface Props { lang: Lang; alternates: Record<Lang, string> }
 const { lang, alternates } = Astro.props;
@@ -23,6 +23,7 @@ const nav = [
     <nav class="main-nav" id="main-nav" aria-label="Main">
       <ul>
         {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        <li class="my-leads-link" hidden><a href={myLeadsPath(lang)}>{t.navMyLeads}</a></li>
       </ul>
     </nav>
 
@@ -54,6 +55,14 @@ const nav = [
 </header>
 
 <script>
+  const showMyLeads = () => {
+    let has = false;
+    try { has = JSON.parse(localStorage.getItem('me-my-leads') || '[]').length > 0; } catch {}
+    document.querySelectorAll<HTMLElement>('.my-leads-link').forEach((el) => (el.hidden = !has));
+  };
+  showMyLeads();
+  document.addEventListener('me:lead-created', showMyLeads);
+
   const btn = document.querySelector<HTMLButtonElement>('.menu-toggle');
   const header = document.querySelector('.site-header');
   btn?.addEventListener('click', () => {

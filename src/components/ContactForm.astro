@@ -1,107 +1,132 @@
 ---
 /**
  * Форма заявки.
- * При нажатии «Отправить заявку» открывается WhatsApp на номер компании
- * с уже набранным текстом заявки — клиенту остаётся нажать «Отправить».
- * Дополнительно (на Netlify) копия заявки сохраняется в Netlify Forms → lead.
+ * Заявка сохраняется на сервере → сантехник получает уведомление в WhatsApp
+ * и видит её в панели /panel/. Клиент видит свою заявку в «Мои заявки».
+ * Если сервер недоступен — предлагаем отправить ту же заявку через WhatsApp.
  */
 import Icon from './Icon.astro';
-import { ui, privacyPath, type Lang } from '../lib/i18n';
-import { getServices, settings } from '../lib/data';
+import { ui, privacyPath, myLeadsPath, type Lang } from '../lib/i18n';
+import { getServices, settings, waHref } from '../lib/data';
 interface Props { lang: Lang; preselect?: string }
 const { lang, preselect } = Astro.props;
 const t = ui[lang];
 const services = getServices(lang);
 ---
-<form
-  class="lead-form card"
-  name="lead"
-  method="POST"
-  data-netlify="true"
-  netlify-honeypot="bot-field"
-  data-wa={settings.whatsapp}
-  data-ok={t.formOk}
-  data-blocked={t.formPopupBlocked}
-  data-header={`${t.formWaHeader} ${settings.brand}`}
-  data-l-name={t.formName}
-  data-l-phone={t.formPhone}
-  data-l-service={t.formService}
-  data-l-message={t.formMessage}
->
-  <h3>{t.formTitle}</h3>
-  <input type="hidden" name="form-name" value="lead" />
-  <input type="hidden" name="lang" value={lang} />
-  <input type="hidden" name="page" value="" />
-  <p class="hp" aria-hidden="true"><label>Bot <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+<div class="lead-box card">
+  <form
+    class="lead-form"
+    name="lead"
+    data-wa={settings.whatsapp}
+    data-sending={t.formSending}
+    data-error={t.formError}
+    data-error-wa={t.leadErrorWa}
+    data-header={`${t.formWaHeader} ${settings.brand}`}
+    data-l-name={t.formName}
+    data-l-phone={t.formPhone}
+    data-l-service={t.formService}
+    data-l-message={t.formMessage}
+    data-lang={lang}
+  >
+    <h3>{t.formTitle}</h3>
+    <p class="hp" aria-hidden="true"><label>Bot <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
 
-  <label class="field">
-    <span>{t.formName}</span>
-    <input type="text" name="name" required autocomplete="name" />
-  </label>
-  <label class="field">
-    <span>{t.formPhone}</span>
-    <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" placeholder="+34 …" />
-  </label>
-  <label class="field">
-    <span>{t.formService}</span>
-    <select name="service">
-      {services.map((s) => <option value={s.title} selected={s.id === preselect}>{s.title}</option>)}
-      <option value={t.formServiceOther}>{t.formServiceOther}</option>
-    </select>
-  </label>
-  <label class="field">
-    <span>{t.formMessage}</span>
-    <textarea name="message" rows="3"></textarea>
-  </label>
-  <label class="check">
-    <input type="checkbox" name="consent" value="yes" required />
-    <span>{t.formConsent} <a href={privacyPath(lang)} target="_blank">{t.formConsentLink}</a></span>
-  </label>
-  <button type="submit" class="btn btn-wa btn-block btn-lg"><Icon name="whatsapp" /> {t.formSubmit}</button>
-  <p class="form-note">{t.formWaNote}</p>
-  <p class="form-status" role="status" aria-live="polite"></p>
-</form>
+    <label class="field">
+      <span>{t.formName}</span>
+      <input type="text" name="name" required maxlength="100" autocomplete="name" />
+    </label>
+    <label class="field">
+      <span>{t.formPhone}</span>
+      <input type="tel" name="phone" required maxlength="30" autocomplete="tel" inputmode="tel" placeholder="+34 …" pattern="[\d\s+()\-]{6,30}" />
+    </label>
+    <label class="field">
+      <span>{t.formService}</span>
+      <select name="service">
+        {services.map((s) => <option value={s.title} selected={s.id === preselect}>{s.title}</option>)}
+        <option value={t.formServiceOther}>{t.formServiceOther}</option>
+      </select>
+    </label>
+    <label class="field">
+      <span>{t.formMessage}</span>
+      <textarea name="message" rows="3" maxlength="2000"></textarea>
+    </label>
+    <label class="check">
+      <input type="checkbox" name="consent" value="yes" required />
+      <span>{t.formConsent} <a href={privacyPath(lang)} target="_blank">{t.formConsentLink}</a></span>
+    </label>
+    <button type="submit" class="btn btn-red btn-block btn-lg">{t.formSubmit}</button>
+    <p class="form-status err" role="alert" hidden></p>
+  </form>
+
+  <div class="lead-ok" hidden role="status" aria-live="polite">
+    <div class="lead-ok-icon"><Icon name="check" size={34} /></div>
+    <h3 data-title={t.leadOkTitle}></h3>
+    <p>{t.leadOkText}</p>
+    <div class="lead-ok-actions">
+      <a href={myLeadsPath(lang)} class="btn btn-dark btn-block" data-track="click_cta" data-track-label="my_leads">{t.leadOkMy}</a>
+      <a href={waHref()} class="btn btn-wa btn-block lead-ok-wa" target="_blank" rel="noopener" data-track-location="lead_ok">
+        <Icon name="whatsapp" /> {t.leadOkWa}
+      </a>
+    </div>
+  </div>
+</div>
 
 <script>
+  import { createLead } from '../lib/api';
+
   document.querySelectorAll<HTMLFormElement>('form.lead-form').forEach((form) => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const d = form.dataset;
-      const val = (n: string) => ((form.elements.namedItem(n) as HTMLInputElement)?.value || '').trim();
-      if (val('bot-field')) return; // спам-бот
+    const box = form.closest('.lead-box')!;
+    const ok = box.querySelector<HTMLElement>('.lead-ok')!;
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const d = form.dataset;
+    const val = (n: string) => ((form.elements.namedItem(n) as HTMLInputElement)?.value || '').trim();
 
-      // 1) Текст заявки для WhatsApp
-      const lines = [
-        `*${d.header}*`,
-        `${d.lName}: ${val('name')}`,
-        `${d.lPhone}: ${val('phone')}`,
-        `${d.lService}: ${val('service')}`,
-      ];
+    const waText = (id?: string) => {
+      const lines = [`*${d.header}*${id ? ` №${id}` : ''}`, `${d.lName}: ${val('name')}`, `${d.lPhone}: ${val('phone')}`, `${d.lService}: ${val('service')}`];
       if (val('message')) lines.push(`${d.lMessage}: ${val('message')}`);
-      const url = `https://wa.me/${d.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
+      return `https://wa.me/${d.wa}?text=${encodeURIComponent(lines.join('\n'))}`;
+    };
 
-      // Открываем сразу (синхронно), чтобы браузер не заблокировал окно
-      window.open(url, '_blank', 'noopener');
-
-      // Запасная ссылка — на случай, если браузер не дал открыть окно
-      const status = form.querySelector<HTMLElement>('.form-status')!;
-      status.className = 'form-status ok';
-      status.textContent = d.ok!;
-      const a = document.createElement('a');
-      a.href = url; a.target = '_blank'; a.rel = 'noopener';
-      a.textContent = d.blocked!;
-      status.append(document.createElement('br'), a);
-      (window as any).meTrack?.('generate_lead', { location: 'form', label: val('service'), method: 'whatsapp' });
-
-      // 2) Резервная копия заявки в Netlify Forms (на хостинге Netlify); ошибки игнорируем
-      (form.elements.namedItem('page') as HTMLInputElement).value = location.pathname;
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form) as any).toString(),
-      }).catch(() => {});
-
-      form.reset();
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.hidden = true;
+      const label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = d.sending!;
+      try {
+        const res = await createLead({
+          name: val('name'),
+          phone: val('phone'),
+          service: val('service'),
+          message: val('message'),
+          lang: d.lang!,
+          page: location.pathname,
+          consent: (form.elements.namedItem('consent') as HTMLInputElement).checked,
+          'bot-field': val('bot-field'),
+        });
+        ok.querySelector('h3')!.textContent = ok.querySelector('h3')!.dataset.title!.replace('{id}', res.id);
+        ok.querySelector<HTMLAnchorElement>('.lead-ok-wa')!.href = waText(res.id);
+        (window as any).meTrack?.('generate_lead', { location: 'form', label: val('service'), method: 'form' });
+        form.hidden = true;
+        ok.hidden = false;
+        form.reset();
+        document.dispatchEvent(new CustomEvent('me:lead-created'));
+      } catch {
+        // Сервер недоступен — не теряем клиента: предлагаем WhatsApp с той же заявкой
+        status.textContent = d.error!;
+        const a = document.createElement('a');
+        a.href = waText();
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'btn btn-wa btn-block';
+        a.textContent = d.errorWa!;
+        status.append(a);
+        status.hidden = false;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
     });
   });
 </script>
