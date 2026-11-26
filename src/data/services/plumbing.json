@@ -1,22 +1,4 @@
 {
-  "es": {
-    "order": 1,
-    "icon": "pipe",
-    "image": "",
-    "slug": "fontaneria",
-    "title": "Fontanería y suministro de agua",
-    "short": "Instalación y cambio de tuberías, reparación de fugas y atascos, recuperación de la presión del agua.",
-    "items": [
-      "Instalación y sustitución de tuberías de cualquier complejidad",
-      "Reparación de fugas, atascos y averías",
-      "Recuperación de la presión normal del agua",
-      "Limpieza y lavado de instalaciones de agua",
-      "Instalación y modernización de sistemas de ingeniería"
-    ],
-    "body": "¿Gotea una tubería, tiene poca presión de agua o un atasco que vuelve una y otra vez? Gastar dinero en soluciones temporales sale caro. Primero localizamos la **causa real** de la avería y después la reparamos de forma profesional y duradera.\n\nCon más de 26 años de experiencia trabajamos en viviendas, comunidades y locales comerciales de Valencia, Sagunto y alrededores. Antes de empezar acordamos el precio y emitimos **factura** por todos los trabajos a través de Maestro Especial S.L.\n\n**Consejo:** envíe por WhatsApp fotos o un vídeo de la avería y le daremos una valoración previa.",
-    "seoTitle": "Fontanero en Valencia y Sagunto — fugas, atascos, tuberías",
-    "seoDescription": "Fontanero con más de 26 años de experiencia en Valencia y Sagunto: fugas, atascos, cambio de tuberías, presión de agua. Precio acordado antes de empezar. Factura."
-  },
   "ru": {
     "order": 1,
     "icon": "pipe",
@@ -34,6 +16,24 @@
     "body": "Протекают трубы, слабый напор воды или засор, который возвращается снова и снова? Не стоит тратить деньги на временные решения и бесконечные переделки. Сначала мы находим **настоящую причину** неисправности, а затем устраняем её профессионально и надолго.\n\nБолее 26 лет опыта: квартиры, частные дома, жилые комплексы и коммерческие помещения в Валенсии, Сагунто и окрестностях. Стоимость согласовывается до начала работ, на все работы выставляется **factura** от Maestro Especial S.L.\n\n**Совет:** отправьте в WhatsApp фото или видео неисправности — предварительно оценим ситуацию и обсудим решение.",
     "seoTitle": "Сантехник в Валенсии и Сагунто — протечки, засоры, трубы",
     "seoDescription": "Русскоязычный сантехник в Валенсии и Сагунто, опыт более 26 лет: протечки, засоры, замена труб, давление воды. Цена до начала работ. Factura."
+  },
+  "es": {
+    "order": 1,
+    "icon": "pipe",
+    "image": "",
+    "slug": "fontaneria",
+    "title": "Fontanería y suministro de agua",
+    "short": "Instalación y cambio de tuberías, reparación de fugas y atascos, recuperación de la presión del agua.",
+    "items": [
+      "Instalación y sustitución de tuberías de cualquier complejidad",
+      "Reparación de fugas, atascos y averías",
+      "Recuperación de la presión normal del agua",
+      "Limpieza y lavado de instalaciones de agua",
+      "Instalación y modernización de sistemas de ingeniería"
+    ],
+    "body": "¿Gotea una tubería, tiene poca presión de agua o un atasco que vuelve una y otra vez? Gastar dinero en soluciones temporales sale caro. Primero localizamos la **causa real** de la avería y después la reparamos de forma profesional y duradera.\n\nCon más de 26 años de experiencia trabajamos en viviendas, comunidades y locales comerciales de Valencia, Sagunto y alrededores. Antes de empezar acordamos el precio y emitimos **factura** por todos los trabajos a través de Maestro Especial S.L.\n\n**Consejo:** envíe por WhatsApp fotos o un vídeo de la avería y le daremos una valoración previa.",
+    "seoTitle": "Fontanero en Valencia y Sagunto — fugas, atascos, tuberías",
+    "seoDescription": "Fontanero con más de 26 años de experiencia en Valencia y Sagunto: fugas, atascos, cambio de tuberías, presión de agua. Precio acordado antes de empezar. Factura."
   },
   "en": {
     "order": 1,

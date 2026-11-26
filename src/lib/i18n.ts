@@ -1,6 +1,6 @@
-export const LANGS = ['es', 'ru', 'en'] as const;
+export const LANGS = ['ru', 'es', 'en'] as const;
 export type Lang = (typeof LANGS)[number];
-export const DEFAULT_LANG: Lang = 'es';
+export const DEFAULT_LANG: Lang = 'ru';
 
 export const LANG_META: Record<Lang, { label: string; name: string; hreflang: string; ogLocale: string }> = {
   es: { label: 'ES', name: 'Español', hreflang: 'es', ogLocale: 'es_ES' },
@@ -8,7 +8,7 @@ export const LANG_META: Record<Lang, { label: string; name: string; hreflang: st
   en: { label: 'EN', name: 'English', hreflang: 'en', ogLocale: 'en_GB' },
 };
 
-/** Путь-префикс языка: испанский — в корне сайта. */
+/** Путь-префикс языка: русский (основной) — в корне сайта. */
 export const langPrefix = (lang: Lang) => (lang === DEFAULT_LANG ? '' : `/${lang}`);
 
 /** Сегмент адреса для страниц услуг. */

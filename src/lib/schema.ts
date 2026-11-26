@@ -32,7 +32,7 @@ export function businessSchema(lang: Lang, services: Service[]) {
       ...(settings.address ? { streetAddress: settings.address } : {}),
       ...(settings.postalCode ? { postalCode: settings.postalCode } : {}),
     },
-    knowsLanguage: ['es', 'ru', 'en'],
+    knowsLanguage: ['ru', 'es', 'en'],
     sameAs,
     hasOfferCatalog: {
       '@type': 'OfferCatalog',

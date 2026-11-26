@@ -1,22 +1,4 @@
 {
-  "es": {
-    "order": 2,
-    "icon": "flame",
-    "image": "",
-    "slug": "calefaccion-aerotermia",
-    "title": "Calefacción y aerotermia",
-    "short": "Instalación y cambio de calderas, radiadores, suelo radiante y sistemas de aerotermia.",
-    "items": [
-      "Instalación y sustitución de calderas",
-      "Instalación de radiadores y suelo radiante",
-      "Instalación de sistemas de aerotermia",
-      "Limpieza de circuitos de calefacción e intercambiadores",
-      "Diagnóstico, reparación y optimización de la calefacción"
-    ],
-    "body": "¿La calefacción no calienta bien, los radiadores están fríos por arriba o la factura de energía no para de subir? Hacemos un diagnóstico técnico de toda la instalación y proponemos la solución correcta, no un parche.\n\nInstalamos **aerotermia** — una de las formas más eficientes de calefacción y agua caliente sanitaria — así como calderas, radiadores y suelo radiante. También limpiamos circuitos e intercambiadores para recuperar el rendimiento de sistemas existentes.\n\nTrabajamos en Valencia, Sagunto y alrededores. Precio acordado antes de empezar y factura por todos los trabajos.",
-    "seoTitle": "Calefacción y aerotermia en Valencia — instalación y reparación",
-    "seoDescription": "Instalación de aerotermia, calderas, radiadores y suelo radiante en Valencia y Sagunto. Limpieza de circuitos y reparación de calefacción. Más de 26 años de experiencia."
-  },
   "ru": {
     "order": 2,
     "icon": "flame",
@@ -34,6 +16,24 @@
     "body": "Отопление плохо греет, радиаторы холодные сверху или счета за энергию постоянно растут? Мы проводим техническую диагностику всей системы и предлагаем правильное решение, а не временную «заплатку».\n\nМонтируем **аэротермию** — один из самых эффективных способов отопления и горячего водоснабжения, — а также котлы, радиаторы и тёплые полы. Промываем системы отопления и теплообменники, чтобы вернуть производительность существующему оборудованию.\n\nРаботаем в Валенсии, Сагунто и окрестностях. Стоимость согласовывается до начала работ, выставляем factura.",
     "seoTitle": "Отопление и аэротермия в Валенсии — монтаж и ремонт",
     "seoDescription": "Монтаж аэротермии, котлов, радиаторов и тёплых полов в Валенсии и Сагунто. Промывка систем и ремонт отопления. Опыт более 26 лет, русскоязычный мастер."
+  },
+  "es": {
+    "order": 2,
+    "icon": "flame",
+    "image": "",
+    "slug": "calefaccion-aerotermia",
+    "title": "Calefacción y aerotermia",
+    "short": "Instalación y cambio de calderas, radiadores, suelo radiante y sistemas de aerotermia.",
+    "items": [
+      "Instalación y sustitución de calderas",
+      "Instalación de radiadores y suelo radiante",
+      "Instalación de sistemas de aerotermia",
+      "Limpieza de circuitos de calefacción e intercambiadores",
+      "Diagnóstico, reparación y optimización de la calefacción"
+    ],
+    "body": "¿La calefacción no calienta bien, los radiadores están fríos por arriba o la factura de energía no para de subir? Hacemos un diagnóstico técnico de toda la instalación y proponemos la solución correcta, no un parche.\n\nInstalamos **aerotermia** — una de las formas más eficientes de calefacción y agua caliente sanitaria — así como calderas, radiadores y suelo radiante. También limpiamos circuitos e intercambiadores para recuperar el rendimiento de sistemas existentes.\n\nTrabajamos en Valencia, Sagunto y alrededores. Precio acordado antes de empezar y factura por todos los trabajos.",
+    "seoTitle": "Calefacción y aerotermia en Valencia — instalación y reparación",
+    "seoDescription": "Instalación de aerotermia, calderas, radiadores y suelo radiante en Valencia y Sagunto. Limpieza de circuitos y reparación de calefacción. Más de 26 años de experiencia."
   },
   "en": {
     "order": 2,

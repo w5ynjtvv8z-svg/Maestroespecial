@@ -26,8 +26,8 @@ public_folder: /images/uploads
 
 i18n:
   structure: single_file
-  locales: [es, ru, en]
-  default_locale: es
+  locales: [ru, es, en]
+  default_locale: ru
 
 collections:
   # ---------- Настройки ----------

@@ -15,7 +15,7 @@ export default async (req) => {
     phone: clip(body.phone, 30),
     service: clip(body.service, 150),
     message: clip(body.message, 2000),
-    lang: LANGS.includes(body.lang) ? body.lang : 'es',
+    lang: LANGS.includes(body.lang) ? body.lang : 'ru',
     page: clip(body.page, 200),
   };
   const digits = lead.phone.replace(/\D/g, '');

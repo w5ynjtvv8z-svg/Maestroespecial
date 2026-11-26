@@ -4,7 +4,7 @@ import { getStore } from '@netlify/blobs';
 import crypto from 'node:crypto';
 
 export const STATUSES = ['new', 'accepted', 'done', 'rejected'];
-export const LANGS = ['es', 'ru', 'en'];
+export const LANGS = ['ru', 'es', 'en'];
 
 const env = (name) => process.env[name] || '';
 

@@ -1,6 +1,6 @@
 // Карта сайта для Google с hreflang-связками между языковыми версиями.
 import type { APIRoute } from 'astro';
-import { LANGS, homePath, servicePath, type Lang } from '../lib/i18n';
+import { LANGS, DEFAULT_LANG, homePath, servicePath, type Lang } from '../lib/i18n';
 import { getServices, getServiceById } from '../lib/data';
 
 export const GET: APIRoute = ({ site }) => {
@@ -8,7 +8,7 @@ export const GET: APIRoute = ({ site }) => {
   const groups: Record<Lang, string>[] = [];
 
   groups.push(Object.fromEntries(LANGS.map((l) => [l, homePath(l)])) as Record<Lang, string>);
-  for (const s of getServices('es')) {
+  for (const s of getServices(DEFAULT_LANG)) {
     groups.push(
       Object.fromEntries(
         LANGS.map((l) => {
@@ -23,7 +23,7 @@ export const GET: APIRoute = ({ site }) => {
   const urls = groups.flatMap((g) =>
     LANGS.map((l) => {
       const links = LANGS.map((x) => `<xhtml:link rel="alternate" hreflang="${x}" href="${abs(g[x])}"/>`).join('');
-      return `<url><loc>${abs(g[l])}</loc><lastmod>${today}</lastmod>${links}<xhtml:link rel="alternate" hreflang="x-default" href="${abs(g.es)}"/></url>`;
+      return `<url><loc>${abs(g[l])}</loc><lastmod>${today}</lastmod>${links}<xhtml:link rel="alternate" hreflang="x-default" href="${abs(g[DEFAULT_LANG])}"/></url>`;
     }),
   );
 
