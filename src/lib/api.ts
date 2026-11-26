@@ -4,7 +4,7 @@
 // пароль панели в демо: demo
 const DEMO = import.meta.env.PUBLIC_DEMO === '1';
 
-export type Status = 'new' | 'accepted' | 'done' | 'rejected';
+export type Status = 'new' | 'viewed' | 'accepted' | 'done' | 'rejected';
 export interface PublicLead {
   id: string;
   createdAt: string;

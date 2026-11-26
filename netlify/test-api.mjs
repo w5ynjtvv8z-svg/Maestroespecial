@@ -61,7 +61,11 @@ let all = (await (await admin(req('GET', null, auth), {})).json()).leads;
 assert.equal(all.length, 2);
 assert.ok(all.every((l) => l.token === undefined && l.phone));
 
-// 6. Смена статуса и заметки, клиент видит новый статус
+// 6. Сантехник открыл заявку → клиент видит «просмотрена»
+await admin(req('PATCH', { status: 'viewed' }, auth), { params: { id: a.id } });
+mine = (await (await myLeads(req('POST', { items: [{ id: a.id, token: a.token }] }))).json()).leads;
+assert.equal(mine[0].status, 'viewed');
+// Смена статуса и заметки, клиент видит новый статус
 r = await admin(req('PATCH', { status: 'accepted', note: 'Приеду в среду' }, auth), { params: { id: a.id } });
 assert.equal((await r.json()).lead.status, 'accepted');
 await admin(req('PATCH', { status: 'bogus' }, auth), { params: { id: a.id } });
@@ -73,7 +77,7 @@ assert.equal(mine[0].note, undefined);
 await admin(req('DELETE', null, auth), { params: { id: b.id } });
 all = (await (await admin(req('GET', null, auth), {})).json()).leads;
 assert.equal(all.length, 1);
-assert.equal(all[0].history.length, 2);
+assert.equal(all[0].history.length, 3);
 
 console.log('\nВсе проверки пройдены ✔');
 await server.stop();

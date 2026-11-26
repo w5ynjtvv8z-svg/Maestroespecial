@@ -6,7 +6,8 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = ui[lang];
 const alternates = Object.fromEntries(LANGS.map((l) => [l, myLeadsPath(l)])) as Record<Lang, string>;
-const labels = { new: t.st_new, accepted: t.st_accepted, done: t.st_done, rejected: t.st_rejected };
+const labels = { new: t.st_new, viewed: t.st_viewed, accepted: t.st_accepted, done: t.st_done, rejected: t.st_rejected };
+const hints = { new: t.hint_new, viewed: t.hint_viewed, accepted: t.hint_accepted, done: t.hint_done, rejected: t.hint_rejected };
 ---
 <Base lang={lang} title={t.myLeadsTitle} description={t.myLeadsIntro} alternates={alternates} noindex>
   <section class="section">
@@ -14,7 +15,7 @@ const labels = { new: t.st_new, accepted: t.st_accepted, done: t.st_done, reject
       <h1>{t.myLeadsTitle}</h1>
       <p class="muted">{t.myLeadsIntro}</p>
 
-      <div id="my-leads" data-lang={lang} data-labels={JSON.stringify(labels)} data-number={t.myLeadsNumber} data-updated={t.myLeadsUpdated} data-error={t.myLeadsError}>
+      <div id="my-leads" data-lang={lang} data-labels={JSON.stringify(labels)} data-hints={JSON.stringify(hints)} data-number={t.myLeadsNumber} data-updated={t.myLeadsUpdated} data-error={t.myLeadsError}>
         <p class="muted">{t.myLeadsLoading}</p>
       </div>
 
@@ -33,13 +34,14 @@ const labels = { new: t.st_new, accepted: t.st_accepted, done: t.st_done, reject
   const empty = document.getElementById('my-leads-empty')!;
   const d = root.dataset;
   const labels = JSON.parse(d.labels!);
+  const hints = JSON.parse(d.hints!);
   const locale = { es: 'es-ES', ru: 'ru-RU', en: 'en-GB' }[d.lang as 'es'] || 'es-ES';
   const fmt = (iso: string) => new Date(iso).toLocaleString(locale, { dateStyle: 'medium', timeStyle: 'short' });
-  const steps = ['new', 'accepted', 'done'];
+  const steps = ['new', 'viewed', 'accepted', 'done'];
 
   const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
-  fetchMyLeads()
+  const load = () => fetchMyLeads()
     .then((leads) => {
       if (!leads.length) {
         root.innerHTML = '';
@@ -61,8 +63,9 @@ const labels = { new: t.st_new, accepted: t.st_accepted, done: t.st_done, reject
               <span class="pill pill-${l.status}">${esc(labels[l.status])}</span>
             </div>
             <p class="my-lead-meta">${fmt(l.createdAt)} · ${esc(l.service)}</p>
-            ${l.message ? `<p>${esc(l.message)}</p>` : ''}
+            ${l.message ? `<p class="my-lead-msg">${esc(l.message)}</p>` : ''}
             ${progress}
+            <p class="my-lead-hint hint-${l.status}">${esc(hints[l.status])}</p>
             ${l.updatedAt !== l.createdAt ? `<p class="my-lead-meta">${esc(d.updated!)}: ${fmt(l.updatedAt)}</p>` : ''}
           </article>`;
         })
@@ -71,4 +74,9 @@ const labels = { new: t.st_new, accepted: t.st_accepted, done: t.st_done, reject
     .catch(() => {
       root.innerHTML = `<p class="form-status err">${esc(d.error!)}</p>`;
     });
+
+  load();
+  // Статус обновляется сам каждые 30 секунд
+  setInterval(() => { if (!document.hidden) load(); }, 30000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); });
 </script>

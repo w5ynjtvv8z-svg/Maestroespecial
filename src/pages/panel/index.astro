@@ -51,7 +51,8 @@ import { settings } from '../../lib/data';
   <main id="p-app" class="p-wrap" hidden>
     <nav class="p-tabs" role="tablist">
       <button data-tab="new" class="active">Новые <b data-count="new">0</b></button>
-      <button data-tab="accepted">Принятые <b data-count="accepted">0</b></button>
+      <button data-tab="viewed">Просмотренные <b data-count="viewed">0</b></button>
+      <button data-tab="accepted">В работе <b data-count="accepted">0</b></button>
       <button data-tab="done">Выполненные <b data-count="done">0</b></button>
       <button data-tab="rejected">Отказ <b data-count="rejected">0</b></button>
       <button data-tab="all">Все <b data-count="all">0</b></button>
@@ -78,18 +79,20 @@ import { settings } from '../../lib/data';
 
     if (isDemo) $('#p-demo').hidden = false;
 
-    const STATUS: Record<Status, string> = { new: 'Новая', accepted: 'Принята', done: 'Выполнена', rejected: 'Отказ' };
+    const STATUS: Record<Status, string> = { new: 'Новая', viewed: 'Просмотрена', accepted: 'В работе', done: 'Выполнена', rejected: 'Отказ' };
     const LANG: Record<string, string> = { es: '🇪🇸 испанский', ru: '🇷🇺 русский', en: '🇬🇧 английский' };
     const GREET: Record<string, string> = {
       es: 'Hola, le escribe el técnico de Maestro Especial sobre su solicitud nº',
       ru: 'Здравствуйте! Это мастер Maestro Especial по вашей заявке №',
       en: 'Hello, this is the technician from Maestro Especial about your request No.',
     };
+    // Кнопки смены статуса. Клиент видит: На рассмотрении → Просмотрена → В работе → Выполнено
     const ACTIONS: Record<Status, [Status, string, string][]> = {
-      new: [['accepted', 'Принять', 'btn-red'], ['rejected', 'Отказ', 'btn-outline']],
-      accepted: [['done', 'Выполнено ✓', 'btn-wa'], ['new', 'Вернуть в новые', 'btn-outline'], ['rejected', 'Отказ', 'btn-outline']],
+      new: [],
+      viewed: [['accepted', 'Принять в работу', 'btn-red'], ['rejected', 'Отказ', 'btn-outline']],
+      accepted: [['done', 'Выполнено ✓', 'btn-wa'], ['rejected', 'Отказ', 'btn-outline']],
       done: [['accepted', 'Вернуть в работу', 'btn-outline']],
-      rejected: [['new', 'Вернуть в новые', 'btn-outline']],
+      rejected: [['viewed', 'Вернуть на рассмотрение', 'btn-outline']],
     };
 
     const esc = (s = '') => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -139,7 +142,7 @@ import { settings } from '../../lib/data';
     }
 
     function render() {
-      const counts: Record<string, number> = { new: 0, accepted: 0, done: 0, rejected: 0, all: leads.length };
+      const counts: Record<string, number> = { new: 0, viewed: 0, accepted: 0, done: 0, rejected: 0, all: leads.length };
       leads.forEach((l) => counts[l.status]++);
       document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => (el.textContent = String(counts[el.dataset.count!])));
       document.title = (counts.new ? `(${counts.new}) ` : '') + 'Заявки — Maestro Especial';
@@ -160,6 +163,18 @@ import { settings } from '../../lib/data';
         .map((l) => {
           const wa = `https://wa.me/${waDigits(l.phone)}?text=${encodeURIComponent(`${GREET[l.lang] || GREET.es} ${l.id}`)}`;
           const history = (l.history || []).map((h) => `<li>${fmt(h.at)} — ${STATUS[h.status]}</li>`).join('');
+          if (l.status === 'new') {
+            // Новая заявка — свёрнута. «Открыть» = сантехник прочитал → клиент видит «Просмотрена»
+            return `<article class="lead card lead-new lead-closed" data-id="${l.id}">
+              <div class="lead-head">
+                <span class="lead-no">№ ${esc(l.id)}</span>
+                <span class="pill pill-new">Новая</span>
+                <time title="${fmt(l.createdAt)}">${ago(l.createdAt)}</time>
+              </div>
+              <p class="lead-service">🔧 ${esc(l.service)}</p>
+              <button class="btn btn-red btn-block" data-open>Открыть заявку</button>
+            </article>`;
+          }
           return `<article class="lead card lead-${l.status}" data-id="${l.id}">
             <div class="lead-head">
               <span class="lead-no">№ ${esc(l.id)}</span>
@@ -248,6 +263,15 @@ import { settings } from '../../lib/data';
       const id = card.dataset.id!;
       const statusBtn = target.closest<HTMLButtonElement>('[data-status]');
       if (statusBtn) update(id, { status: statusBtn.dataset.status as Status });
+      if (target.closest('[data-open]')) {
+        update(id, { status: 'viewed' });
+        // Переходим во вкладку «Просмотренные», чтобы сразу увидеть открытую заявку
+        if (tab === 'new') {
+          tab = 'viewed';
+          document.querySelectorAll<HTMLElement>('[data-tab]').forEach((x) => x.classList.toggle('active', x.dataset.tab === 'viewed'));
+        }
+        setTimeout(() => document.querySelector(`.lead[data-id="${id}"]`)?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 150);
+      }
       if (target.closest('[data-delete]') && confirm(`Удалить заявку № ${id}? Это нельзя отменить.`)) {
         adminDelete(token, id).then(() => {
           leads = leads.filter((l) => l.id !== id);
@@ -293,7 +317,9 @@ import { settings } from '../../lib/data';
     .p-list { display: grid; gap: 12px; }
     .lead { padding: 18px; border-left: 5px solid var(--line); }
     .lead-new { border-left-color: var(--red); }
+    .lead-viewed { border-left-color: #7c3aed; }
     .lead-accepted { border-left-color: #2563eb; }
+    .lead-closed .lead-service { margin: 10px 0 12px; }
     .lead-done { border-left-color: var(--wa); }
     .lead-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: .9rem; }
     .lead-no { font-weight: 800; letter-spacing: .03em; }
